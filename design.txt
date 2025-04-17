@@ -1,0 +1,62 @@
+# ADMIN
+- admin commands
+
+# AUTH
+- sessions
+- otp
+- accounts
+
+# CHOWBERRY
+- projects
+- participants (project-beneficiaries)
+- partners (project-merchants)
+- tokens
+- proposals (project-merchant applications)
+- requests (project-beneficiaries applications)
+
+# SUPPORT
+- tickets
+- messages
+
+# USERS
+- admins
+- organizations
+- beneficiaries
+- merchants
+- moderators (admins for organizations)
+- person (metadata for an individual who can be a beneficiary)
+- relationships
+
+# PUDDLE
+- products
+- uploads
+- errors
+- documents
+
+# FINANCE
+- wallet
+- transactions
+- deposits
+- withdrawals
+- purchases
+- refunds
+- payout
+- charges
+
+
+NOTES;
+- whenever a withdrawal is made the status is set to pending, which means 
+the withdrawal is waiting for an approval from the admin of the application,
+once the admin approves the withdrawal the status is changed to processing,
+this is when the cron-job can get it and try the payment, if after 3 tries 
+it still fails, the status is set to failed and the removed funds are 
+refunded back to the wallet where they were withdrawn from. if successful
+the status is set to completed and a payout record is created.
+
+- the person entity was created because of the family relationship system,
+so as to keep record of who is connected to who and what is the relationship
+between these people, why it was separated and beneficiary wasn't used 
+directly was because of situations where the family member of a new registered
+beneficiary might not be a beneficiary or might not want to be a beneficiary,
+so we need to differentiate between the beneficiaries and non beneficiaries,
+but still keep the relationship simple
