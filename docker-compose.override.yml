@@ -1,0 +1,80 @@
+services:
+  admin:
+    command: ['npm', 'run', 'start:dev', 'admin']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/admin/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  auth:
+    command: ['npm', 'run', 'start:dev', 'auth']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/auth/.env.dev
+    env_file:
+      - ./envs/auth/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  chowberry:
+    command: ['npm', 'run', 'start:dev', 'chowberry']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/chowberry/.env.dev
+    env_file:
+      - ./envs/finance/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  finance:
+    command: ['npm', 'run', 'start:dev', 'finance']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/finance/.env.dev
+    env_file:
+      - ./envs/finance/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  puddle:
+    command: ['npm', 'run', 'start:dev', 'puddle']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/puddle/.env.dev
+    env_file:
+      - ./envs/puddle/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  support:
+    command: ['npm', 'run', 'start:dev', 'support']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/support/.env.dev
+    env_file:
+      - ./envs/support/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  users:
+    command: ['npm', 'run', 'start:dev', 'users']
+    restart: unless-stopped
+    environment:
+      - ENV_FILE=envs/users/.env.dev
+    env_file:
+      - ./envs/users/.env.dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  mongodb:
+    restart: unless-stopped
+    volumes:
+        - ./mongodb:/data/db

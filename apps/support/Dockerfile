@@ -1,6 +1,5 @@
 # start the first build stage
-# use a node image and name the build stage as "build"
-FROM node:20.13.1-alpine AS build
+FROM node:20.13.1-alpine
 
 # switch to the /app directory in the image 
 WORKDIR /app
@@ -18,7 +17,4 @@ COPY . .
 RUN npm run build
 
 # expose 3000 port
-EXPOSE 3000
-
-# run application
-CMD ["npm", "run", "start:dev", "support"]
+EXPOSE 3005

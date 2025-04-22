@@ -4,15 +4,17 @@ services:
       context: .
       dockerfile: ./apps/admin/Dockerfile
     container_name: admin
+    command: ["node", "dist/apps/admin/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/admin/.env.pro
+      - LOG_PATH=logs/admin
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3000:3000'
 
@@ -21,15 +23,17 @@ services:
       context: .
       dockerfile: ./apps/auth/Dockerfile
     container_name: auth
+    command: ["node", "dist/apps/auth/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/auth/.env.pro
+      - LOG_PATH=logs/auth
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3001:3001'
 
@@ -38,15 +42,17 @@ services:
       context: .
       dockerfile: ./apps/chowberry/Dockerfile
     container_name: chowberry
+    command: ["node", "dist/apps/chowberry/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/chowberry/.env.pro
+      - LOG_PATH=logs/chowberry
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3002:3002'
 
@@ -55,15 +61,17 @@ services:
       context: .
       dockerfile: ./apps/finance/Dockerfile
     container_name: finance
+    command: ["node", "dist/apps/finance/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/finance/.env.pro
+      - LOG_PATH=logs/finance
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3003:3003'
 
@@ -72,15 +80,17 @@ services:
       context: .
       dockerfile: ./apps/puddle/Dockerfile
     container_name: puddle
+    command: ["node", "dist/apps/puddle/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/puddle/.env.pro
+      - LOG_PATH=logs/puddle
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3004:3004'
   
@@ -89,15 +99,17 @@ services:
       context: .
       dockerfile: ./apps/support/Dockerfile
     container_name: support
+    command: ["node", "dist/apps/support/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/support/.env.pro
+      - LOG_PATH=logs/support
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3005:3005'
 
@@ -106,15 +118,17 @@ services:
       context: .
       dockerfile: ./apps/users/Dockerfile
     container_name: users
+    command: ["node", "dist/apps/users/main"]
     depends_on:
       - mongodb
       - replicaset
       - rabbitmq
     environment:
-      - NODE_ENV=development
+      - ENV_FILE=envs/users/.env.pro
+      - LOG_PATH=logs/users
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./envs:/app/envs
+      - ./logs:/app/logs
     ports:
       - '3006:3006'
 
@@ -124,8 +138,6 @@ services:
     container_name: mongodb
     restart: always
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
-    volumes:
-      - ./mongodb:/data/db
     ports:
       - '27018:27017'
 
@@ -151,7 +163,7 @@ services:
     restart: "no"
   
   rabbitmq:
-    image: rabbitmq
+    image: rabbitmq:3.13.7-alpine
     container_name: rabbitmq
     platform: linux/arm64
     ports:
