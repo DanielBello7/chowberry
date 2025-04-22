@@ -1,6 +1,6 @@
 import { CONSTANTS } from './types.constants';
 
-export type ADMIN_CONSTANTS = CONSTANTS & {
+type ADMIN_CONSTANTS = CONSTANTS & {
     JWT_SECRET: string;
     EXPIRES_IN: string;
     APP_EMAIL_NAME: string;
