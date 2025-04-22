@@ -1,0 +1,158 @@
+services:
+  admin:
+    build:
+      context: .
+      dockerfile: ./apps/admin/Dockerfile
+    container_name: admin
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+    container_name: auth
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3001:3001'
+
+  chowberry:
+    build:
+      context: .
+      dockerfile: ./apps/chowberry/Dockerfile
+    container_name: chowberry
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3002:3002'
+
+  finance:
+    build:
+      context: .
+      dockerfile: ./apps/finance/Dockerfile
+    container_name: finance
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3003:3003'
+
+  puddle:
+    build:
+      context: .
+      dockerfile: ./apps/puddle/Dockerfile
+    container_name: puddle
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3004:3004'
+  
+  support:
+    build:
+      context: .
+      dockerfile: ./apps/support/Dockerfile
+    container_name: support
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3005:3005'
+
+  users:
+    build:
+      context: .
+      dockerfile: ./apps/users/Dockerfile
+    container_name: users
+    depends_on:
+      - mongodb
+      - replicaset
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - '3006:3006'
+
+  mongodb:
+    image: mongo:latest
+    platform: linux/arm64
+    container_name: mongodb
+    restart: always
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - ./mongodb:/data/db
+    ports:
+      - '27018:27017'
+
+  replicaset:
+    image: mongo:latest
+    platform: linux/arm64
+    container_name: replicaset
+    depends_on:
+      - mongodb
+    entrypoint: ["/bin/bash", "-c"]
+    command:
+      - >
+        echo "Waiting for MongoDB to be ready..." &&
+        until mongosh --host mongodb:27017 --eval "db.runCommand({ ping: 1 })"; do sleep 2; done &&
+        echo "MongoDB is ready! Initializing Replica Set..." &&
+        mongosh --host mongodb:27017 --eval '
+        rs.initiate({
+          _id: "rs0",
+          members: [{ _id: 0, host: "mongodb:27017" }]
+        });
+        ' &&
+        echo "Replica Set Initialized!"
+    restart: "no"
+  
+  rabbitmq:
+    image: rabbitmq
+    container_name: rabbitmq
+    platform: linux/arm64
+    ports:
+      - '5672:5672'

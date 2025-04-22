@@ -82,15 +82,6 @@
                 "tsConfigPath": "libs/enums/tsconfig.lib.json"
             }
         },
-        "envs": {
-            "type": "library",
-            "root": "libs/envs",
-            "entryFile": "index",
-            "sourceRoot": "libs/envs/src",
-            "compilerOptions": {
-                "tsConfigPath": "libs/envs/tsconfig.lib.json"
-            }
-        },
         "finance": {
             "type": "application",
             "root": "apps/finance",

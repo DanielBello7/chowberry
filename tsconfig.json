@@ -29,8 +29,6 @@
             "@app/constants/*": ["libs/constants/src/*"],
             "@app/enums": ["libs/enums/src"],
             "@app/enums/*": ["libs/enums/src/*"],
-            "@app/envs": ["libs/envs/src"],
-            "@app/envs/*": ["libs/envs/src/*"],
             "@app/flutterwave": ["libs/flutterwave/src"],
             "@app/flutterwave/*": ["libs/flutterwave/src/*"],
             "@app/rmq": ["libs/rmq/src"],
