@@ -15,8 +15,8 @@ export const FINANCE_CONSTANTS: FINANCE_CONSTANT = {
         ? parseInt(process.env.PORT as string)
         : 3003,
     RABBIT_URI: (process.env.RABBIT_URI as string) ?? '',
-    RABBIT_QUEUE_TITLE: 'FINANCE_QUEUE',
-    SERVICE: 'FINANCE',
+    RABBIT_QUEUE_TITLE: 'CHOWBERRY_FINANCE_QUEUE',
+    SERVICE: 'CHOWBERRY_FINANCE',
     FL_PUBLIC: (process.env.FL_PUBLIC as string) ?? '',
     FL_SECRET: (process.env.FL_SECRET as string) ?? '',
 };

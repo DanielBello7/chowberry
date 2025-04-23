@@ -74,7 +74,7 @@ services:
       - .:/app
       - /app/node_modules
 
-  mongodb:
+  mongo:
     restart: unless-stopped
     volumes:
         - ./mongodb:/data/db

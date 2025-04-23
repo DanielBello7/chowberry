@@ -10,6 +10,6 @@ export const ADMIN_CONSTANTS: CONSTANTS = {
         ? parseInt(process.env.PORT as string)
         : 3000,
     RABBIT_URI: (process.env.RABBIT_URI as string) ?? '',
-    RABBIT_QUEUE_TITLE: 'ADMIN_QUEUE',
-    SERVICE: 'ADMIN',
+    RABBIT_QUEUE_TITLE: 'CHOWBERRY_ADMIN_QUEUE',
+    SERVICE: 'CHOWBERRY_ADMIN',
 };

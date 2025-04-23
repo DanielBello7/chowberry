@@ -3,12 +3,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/admin/Dockerfile
-    container_name: admin
+    container_name: chowberry-admin
     command: ["node", "dist/apps/admin/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/admin/.env.pro
       - LOG_PATH=logs/admin
@@ -22,12 +22,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/auth/Dockerfile
-    container_name: auth
+    container_name: chowberry-auth
     command: ["node", "dist/apps/auth/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/auth/.env.pro
       - LOG_PATH=logs/auth
@@ -41,12 +41,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/chowberry/Dockerfile
-    container_name: chowberry
+    container_name: chowberry-chowberry
     command: ["node", "dist/apps/chowberry/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/chowberry/.env.pro
       - LOG_PATH=logs/chowberry
@@ -60,12 +60,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/finance/Dockerfile
-    container_name: finance
+    container_name: chowberry-finance
     command: ["node", "dist/apps/finance/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/finance/.env.pro
       - LOG_PATH=logs/finance
@@ -79,12 +79,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/puddle/Dockerfile
-    container_name: puddle
+    container_name: chowberry-puddle
     command: ["node", "dist/apps/puddle/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/puddle/.env.pro
       - LOG_PATH=logs/puddle
@@ -98,12 +98,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/support/Dockerfile
-    container_name: support
+    container_name: chowberry-support
     command: ["node", "dist/apps/support/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/support/.env.pro
       - LOG_PATH=logs/support
@@ -117,12 +117,12 @@ services:
     build:
       context: .
       dockerfile: ./apps/users/Dockerfile
-    container_name: users
+    container_name: chowberry-users
     command: ["node", "dist/apps/users/main"]
     depends_on:
-      - mongodb
-      - replicaset
-      - rabbitmq
+      - mongo
+      - replica
+      - rabbit
     environment:
       - ENV_FILE=envs/users/.env.pro
       - LOG_PATH=logs/users
@@ -132,39 +132,39 @@ services:
     ports:
       - '3006:3006'
 
-  mongodb:
+  mongo:
     image: mongo:latest
     platform: linux/arm64
-    container_name: mongodb
+    container_name: mongo
     restart: always
     command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
     ports:
-      - '27018:27017'
+      - '27019:27017'
 
-  replicaset:
+  replica:
     image: mongo:latest
     platform: linux/arm64
-    container_name: replicaset
+    container_name: replica
     depends_on:
-      - mongodb
+      - mongo
     entrypoint: ["/bin/bash", "-c"]
     command:
       - >
         echo "Waiting for MongoDB to be ready..." &&
-        until mongosh --host mongodb:27017 --eval "db.runCommand({ ping: 1 })"; do sleep 2; done &&
+        until mongosh --host mongo:27017 --eval "db.runCommand({ ping: 1 })"; do sleep 2; done &&
         echo "MongoDB is ready! Initializing Replica Set..." &&
-        mongosh --host mongodb:27017 --eval '
+        mongosh --host mongo:27017 --eval '
         rs.initiate({
           _id: "rs0",
-          members: [{ _id: 0, host: "mongodb:27017" }]
+          members: [{ _id: 0, host: "mongo:27017" }]
         });
         ' &&
         echo "Replica Set Initialized!"
     restart: "no"
   
-  rabbitmq:
+  rabbit:
     image: rabbitmq:3.13.7-alpine
-    container_name: rabbitmq
+    container_name: rabbit
     platform: linux/arm64
     ports:
       - '5672:5672'

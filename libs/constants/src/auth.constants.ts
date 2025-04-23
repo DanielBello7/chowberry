@@ -18,8 +18,8 @@ export const AUTH_CONSTANTS: ADMIN_CONSTANTS = {
         ? parseInt(process.env.PORT as string)
         : 3001,
     RABBIT_URI: (process.env.RABBIT_URI as string) ?? '',
-    RABBIT_QUEUE_TITLE: 'AUTH_QUEUE',
-    SERVICE: 'AUTH',
+    RABBIT_QUEUE_TITLE: 'CHOWBERRY_AUTH_QUEUE',
+    SERVICE: 'CHOWBERRY_AUTH',
     APP_EMAIL: (process.env.APP_EMAIL as string) ?? '',
     APP_EMAIL_NAME: (process.env.APP_EMAIL_NAME as string) ?? '',
     EMAIL_API_KEY: (process.env.EMAIL_API_KEY as string) ?? '',

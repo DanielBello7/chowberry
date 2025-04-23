@@ -16,8 +16,8 @@ export const PUDDLE_CONSTANTS: PUDDLE_CONSTANTS = {
         ? parseInt(process.env.PORT as string)
         : 3004,
     RABBIT_URI: (process.env.RABBIT_URI as string) ?? '',
-    RABBIT_QUEUE_TITLE: 'PUDDLE_QUEUE',
-    SERVICE: 'PUDDLE',
+    RABBIT_QUEUE_TITLE: 'CHOWBERRY_PUDDLE_QUEUE',
+    SERVICE: 'CHOWBERRY_PUDDLE',
     CLOUDINARY_NAME: (process.env.CLOUDINARY_NAME as string) ?? '',
     CLOUDINARY_KEY: (process.env.CLOUDINARY_KEY as string) ?? '',
     CLOUDINARY_SECRET: (process.env.CLOUDINARY_SECRET as string) ?? '',

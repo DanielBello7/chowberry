@@ -10,6 +10,6 @@ export const USERS_CONSTANTS: CONSTANTS = {
         ? parseInt(process.env.PORT as string)
         : 3006,
     RABBIT_URI: (process.env.RABBIT_URI as string) ?? '',
-    RABBIT_QUEUE_TITLE: 'USERS_QUEUE',
-    SERVICE: 'USERS',
+    RABBIT_QUEUE_TITLE: 'CHOWBERRY_USERS_QUEUE',
+    SERVICE: 'CHOWBERRY_USERS',
 };

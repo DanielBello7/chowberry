@@ -10,6 +10,6 @@ export const CHOWBERRY_CONSTANTS: CONSTANTS = {
         ? parseInt(process.env.PORT as string)
         : 3002,
     RABBIT_URI: (process.env.RABBIT_URI as string) ?? '',
-    RABBIT_QUEUE_TITLE: 'CHOWBERRY_QUEUE',
-    SERVICE: 'CHOWBERRY',
+    RABBIT_QUEUE_TITLE: 'CHOWBERRY_CHOWBERRY_QUEUE',
+    SERVICE: 'CHOWBERRY_CHOWBERRY',
 };
