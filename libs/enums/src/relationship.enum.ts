@@ -1,0 +1,7 @@
+export enum RELATIONSHIP_TYPES_ENUM {
+    SPOUSE = 'SPOUSE',
+    PARENT = 'PARENT',
+    CHILD = 'CHILD',
+    PARTNER = 'PARTNER',
+    SIBLING = 'SIBLING',
+}

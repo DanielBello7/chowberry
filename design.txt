@@ -19,12 +19,12 @@
 - messages
 
 # USERS
+- person (metadata for an individual who can be a beneficiary)
 - admins
 - organizations
 - beneficiaries
 - merchants
 - moderators (admins for organizations)
-- person (metadata for an individual who can be a beneficiary)
 - relationships
 
 # PUDDLE
