@@ -3,7 +3,7 @@
 /node_modules
 /build
 /envs
-
+/mongodb
 # Logs
 logs
 *.log
