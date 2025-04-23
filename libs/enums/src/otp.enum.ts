@@ -1,0 +1,4 @@
+export enum OTP_TYPE_ENUM {
+    LOGIN = 'LOGIN',
+    TRANSACTION = 'TRANSACTION',
+}

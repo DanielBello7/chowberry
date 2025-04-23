@@ -2,9 +2,9 @@
 - admin commands
 
 # AUTH
-- sessions
-- otp
-- accounts
+- sessions ✅
+- otp ✅
+- accounts ✅
 
 # CHOWBERRY
 - projects
@@ -19,29 +19,29 @@
 - messages
 
 # USERS
-- person (metadata for an individual who can be a beneficiary)
-- admins
-- organizations
-- beneficiaries
-- merchants
-- moderators (admins for organizations)
-- relationships
+- person (metadata for an individual who can be a beneficiary) ✅
+- admins ✅
+- organizations ✅
+- beneficiaries ✅
+- merchants ✅
+- moderators (admins for organizations) ✅
+- relationships ✅
 
 # PUDDLE
-- products
-- uploads
-- errors
-- documents
+- products ✅
+- uploads ✅
+- errors ✅
+- documents ✅
 
 # FINANCE
-- wallet
-- transactions
-- deposits
-- withdrawals
-- purchases
-- refunds
-- payout
-- charges
+- wallet ✅
+- transactions ✅
+- deposits ✅
+- withdrawals ✅
+- purchases ✅
+- refunds ✅
+- payout ✅
+- charges ✅
 
 
 NOTES;
