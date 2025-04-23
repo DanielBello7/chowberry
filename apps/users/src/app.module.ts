@@ -1,7 +1,17 @@
+import { USERS_CONSTANTS } from '@app/constants';
+import { RmqModule } from '@app/rmq';
+import { WinstonModule } from '@app/winston';
 import { Module } from '@nestjs/common';
 
 @Module({
-    imports: [],
+    imports: [
+        WinstonModule.register({ dir: USERS_CONSTANTS.LOG_PATH }),
+        RmqModule.register({
+            name: USERS_CONSTANTS.SERVICE,
+            qtle: USERS_CONSTANTS.RABBIT_QUEUE_TITLE,
+            urls: USERS_CONSTANTS.RABBIT_URI,
+        }),
+    ],
     controllers: [],
     providers: [],
 })
