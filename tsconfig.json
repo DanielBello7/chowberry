@@ -18,6 +18,8 @@
         "strictBindCallApply": false,
         "noFallthroughCasesInSwitch": false,
         "paths": {
+            "@app/types": ["types"],
+            "@app/types/*": ["types/*"],
             "@app/brevo": ["libs/brevo/src"],
             "@app/brevo/*": ["libs/brevo/src/*"],
             "@app/cloudinary": ["libs/cloudinary/src"],

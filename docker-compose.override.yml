@@ -74,7 +74,6 @@ services:
       - .:/app
       - /app/node_modules
 
-  mongo:
-    restart: unless-stopped
+  postgres:
     volumes:
-        - ./mongodb:/data/db
+      - ./pgdata:/var/lib/postgresql/data
