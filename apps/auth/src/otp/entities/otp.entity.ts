@@ -1,4 +1,4 @@
-import { OTP_TYPE_ENUM } from '@app/enums/otp.enum';
+import { OTP_TYPE_ENUM } from '@app/enums/auth/otp.enum';
 import { OTP } from '@app/types/auth/otp.types';
 export class Otp implements OTP {
   _id: string;

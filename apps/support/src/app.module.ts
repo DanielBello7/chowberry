@@ -8,6 +8,7 @@ import { MessageModule } from './message/message.module';
 import { SupportGateway } from './support/support.gateway';
 import { TicketSchema } from './tickets/schemas/ticket.schema';
 import { MessageSchema } from './message/schemas/message.schema';
+import { SupportModule } from './support/support.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { MessageSchema } from './message/schemas/message.schema';
     }),
     TicketsModule,
     MessageModule,
+    SupportModule,
   ],
   controllers: [],
   providers: [SupportGateway],

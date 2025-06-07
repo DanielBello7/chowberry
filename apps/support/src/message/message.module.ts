@@ -9,5 +9,6 @@ import { MessageSchema } from './schemas/message.schema';
   imports: [TypeOrmModule.forFeature([MessageSchema]), TicketsModule],
   providers: [MessageService],
   controllers: [MessageController],
+  exports: [MessageService],
 })
 export class MessageModule {}

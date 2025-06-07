@@ -11,7 +11,7 @@ import {
   Relation,
 } from 'typeorm';
 import { Ticket } from '../entities/ticket.entity';
-import { TICKET_STATUS_ENUM } from '@app/enums/ticket.enum';
+import { TICKET_STATUS_ENUM } from '@app/enums/support/ticket.enum';
 import { MessageSchema } from '../../message/schemas/message.schema';
 
 @Entity({ name: 'tickets' })

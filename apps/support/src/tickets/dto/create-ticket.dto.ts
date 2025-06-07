@@ -1,6 +1,6 @@
 import { DTO } from '@app/commons/types/dto.types';
 import { Ticket } from '../entities/ticket.entity';
-import { TICKET_STATUS_ENUM } from '@app/enums/ticket.enum';
+import { TICKET_STATUS_ENUM } from '@app/enums/support/ticket.enum';
 import { IsEnum, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class CreateTicketDto implements DTO<Ticket> {

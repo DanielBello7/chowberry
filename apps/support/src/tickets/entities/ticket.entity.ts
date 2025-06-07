@@ -1,4 +1,4 @@
-import { TICKET_STATUS_ENUM } from '@app/enums/ticket.enum';
+import { TICKET_STATUS_ENUM } from '@app/enums/support/ticket.enum';
 import { TICKET } from '@app/types/support/ticket.types';
 import { Message } from '../../message/entities/message.entity';
 
