@@ -24,7 +24,9 @@ export class MessageService {
   async create(data: CreateMessageDto) {
     await this.tickets.findById(data.ticket);
     const response = this.message.create(data);
-    return this.message.save(response);
+    const saved = await this.message.save(response);
+    await this.tickets.update(data.ticket, { lastMessage: saved._id });
+    return saved;
   }
 
   async fetch(query: Record<string, unknown> = {}) {

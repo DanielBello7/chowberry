@@ -12,9 +12,9 @@ import {
 import { Message } from '../entities/message.entity';
 import { TicketSchema } from '../../tickets/schemas/ticket.schema';
 
-@Entity()
+@Entity({ name: 'messages' })
 export class MessageSchema implements Message {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('uuid', { name: 'id' })
   _id: string;
   @Column({ type: 'uuid' })
   account: string;
@@ -22,15 +22,19 @@ export class MessageSchema implements Message {
   body: string;
   @Column({ type: 'varchar', nullable: true })
   media: string | undefined;
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'varchar', nullable: true, name: 'media_type' })
   mediaType: string | undefined;
   @Column({ type: 'uuid' })
   ticket: string;
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', name: 'created_at' })
   createdAt: string;
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', name: 'updated_at' })
   updatedAt: string;
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  @DeleteDateColumn({
+    type: 'timestamp',
+    nullable: true,
+    name: 'deleted_at',
+  })
   deletedAt: string;
 
   @ManyToOne(() => TicketSchema, (ticket) => ticket.Messages)

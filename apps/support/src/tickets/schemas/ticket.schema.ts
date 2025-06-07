@@ -14,9 +14,9 @@ import { Ticket } from '../entities/ticket.entity';
 import { TICKET_STATUS_ENUM } from '@app/enums/ticket.enum';
 import { MessageSchema } from '../../message/schemas/message.schema';
 
-@Entity()
+@Entity({ name: 'tickets' })
 export class TicketSchema implements Ticket {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('uuid', { name: 'id' })
   _id: string;
 
   @Column({ type: 'varchar' })
@@ -38,24 +38,28 @@ export class TicketSchema implements Ticket {
   })
   status: TICKET_STATUS_ENUM;
 
-  @Column({ type: 'uuid', nullable: true })
+  @Column({ type: 'uuid', nullable: true, name: 'last_message' })
   lastMessage: string | undefined;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', name: 'created_at' })
   createdAt: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'timestamp', name: 'updated_at' })
   updatedAt: string;
 
-  @DeleteDateColumn({ type: 'timestamp', nullable: true })
+  @DeleteDateColumn({
+    type: 'timestamp',
+    nullable: true,
+    name: 'deleted_at',
+  })
   deletedAt: string | undefined;
 
-  @OneToMany(() => MessageSchema, (message) => message.ticket)
+  @OneToMany(() => MessageSchema, (message) => message.Ticket)
   Messages: Relation<MessageSchema[]>;
 
   @OneToOne(() => MessageSchema, { nullable: true })
-  @JoinColumn()
-  LastMessage: MessageSchema | undefined;
+  @JoinColumn({ name: 'last_message' })
+  LastMessage: Relation<MessageSchema>;
 
   @BeforeUpdate()
   updated() {
@@ -67,7 +71,5 @@ export class TicketSchema implements Ticket {
     this.createdAt = new Date().toString();
     this.updatedAt = new Date().toString();
     this.Messages = [];
-    this.lastMessage = this.lastMessage ?? undefined;
-    this.LastMessage = undefined;
   }
 }

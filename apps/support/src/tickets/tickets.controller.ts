@@ -28,4 +28,9 @@ export class TicketsController {
   findOne(@Param('id', ParseUUIDPipe) id: string) {
     return this.tickets.findById(id);
   }
+
+  @Get(':id/messages/')
+  messages(@Param('id', ParseUUIDPipe) id: string) {
+    return this.tickets.findWithMessages(id);
+  }
 }
